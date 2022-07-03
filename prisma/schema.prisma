@@ -10,11 +10,57 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model ProductImage {
+  id        String   @id @default(uuid()) @map("_id")
+  url       String
+  altTitle  String
+  product   Product  @relation(fields: [productId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+  productId String
+}
+
+model Brand {
+  id        String    @id @default(uuid()) @map("_id")
+  name      String
+  slug      String    @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+  Product   Product[]
+}
+
 model Product {
-  id           String   @id @default(uuid()) @map("_id")
+  id           String         @id @default(uuid()) @map("_id")
   name         String
   regularPrice Float
   sellingPrice Float
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @default(now())
+  slug         String         @unique
+  description  String
+  stock        Boolean        @default(true)
+  brand        Brand          @relation(fields: [brandId], references: [id])
+  category     Category       @relation(fields: [categoryId], references: [id])
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @default(now()) @updatedAt
+  categoryId   String
+  brandId      String
+  Upselling    Upselling?     @relation(fields: [upsellingId], references: [id])
+  upsellingId  String?
+  ProductImage ProductImage[]
+}
+
+model Upselling {
+  id        String    @id @default(uuid()) @map("_id")
+  products  Product[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now()) @updatedAt
+}
+
+model Category {
+  id         String    @id @default(uuid()) @map("_id")
+  name       String
+  iconString String
+  slug       String    @unique
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @default(now()) @updatedAt
+  Product    Product[]
 }

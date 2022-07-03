@@ -1,9 +1,11 @@
-import { EmailOutlined, LocalPhoneOutlined, PersonOutlined, Search, ShoppingBagOutlined } from '@mui/icons-material'
-import { Box, Divider, Fab, Grid, IconButton, InputBase, Paper, Typography, useTheme } from '@mui/material'
-import TypoCon from './typocon'
-import Link from 'next/link'
-import styles from './Header.module.css'
+import { EmailOutlined, LocalPhoneOutlined, PersonOutlined, ShoppingBagOutlined } from '@mui/icons-material'
+import { Box, Divider, Grid, IconButton, InputBase, Paper, Tab, Tabs, Typography, useTheme } from '@mui/material'
 import Image from 'next/image'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import styles from './Header.module.css'
+import TypoCon from './typocon'
+import React from 'react'
 
 interface HeaderProps {
 
@@ -11,9 +13,14 @@ interface HeaderProps {
 
 export default function Header(props: HeaderProps) {
     const theme = useTheme()
+    const router = useRouter()
+
+    const handleRedirect = (link: string) => {
+        router.push(link)
+    }
 
     return (
-        <>
+        <Box bgcolor='white'>
             {/* Notification section start */}
             <Box bgcolor='red' color='white' paddingX={2} paddingY={.5}><Typography variant='subtitle2' className={styles.text_center}>Disclaimer: This is a demo website and is not intended to provide any services or products. Do not make payments for anything you see on this website. <Link href="/policy"><a className={`${styles.text_underline} next-link`}>Read more</a></Link></Typography></Box>
             {/* Notification section end */}
@@ -74,7 +81,9 @@ export default function Header(props: HeaderProps) {
             <Box paddingX={2}>
                 <Grid container alignItems='center' spacing={5} >
                     <Grid item>
-                        <Image src="/assets/logos/light.svg" height={80} width={200} />
+                        <Link href='/'>
+                            <Image src="/assets/logos/light.svg" height={80} width={200} />
+                        </Link>
                     </Grid>
                     <Grid item flex={1}>
                         <Paper elevation={0} sx={{
@@ -115,6 +124,6 @@ export default function Header(props: HeaderProps) {
             </Box>
             <Divider />
             {/* nav section end */}
-        </>
+        </Box>
     )
 }
