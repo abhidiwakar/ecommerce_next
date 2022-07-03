@@ -82,7 +82,7 @@ export default function Header(props: HeaderProps) {
                 <Grid container alignItems='center' spacing={5} >
                     <Grid item>
                         <Link href='/'>
-                            <Image src="/assets/logos/light.svg" height={80} width={200} />
+                            <Image alt='AB Commerce' src="/assets/logos/light.svg" height={80} width={200} />
                         </Link>
                     </Grid>
                     <Grid item flex={1}>

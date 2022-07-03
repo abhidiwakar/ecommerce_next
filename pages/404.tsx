@@ -11,7 +11,7 @@ export default function PageNotFound() {
                     <SentimentVeryDissatisfiedIcon fontSize="large" />
                     <Typography variant='h2' color='error'>404</Typography>
                     <Typography>
-                        Unfortunately, we couldn't find what you're looking for!
+                        Unfortunately, we couldn&apos;t find what you&apos;re looking for!
                     </Typography>
                 </Grid>
             </Grid>
