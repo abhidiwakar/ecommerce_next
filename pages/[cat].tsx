@@ -23,17 +23,17 @@ export default function Category(props: CategoryProps) {
             <Tabs value={props.currentTab}>
                 {
                     props.category.map((tab, index) => {
-                        return <Tab value={tab.slug} LinkComponent='a' href={`/${tab.slug}`} key={index} icon={tab.iconString && React.createElement(MuiIcon[tab.iconString])} iconPosition='top' label={tab.name} />
+                        return <Tab value={tab.slug} LinkComponent='a' href={`/${tab.slug}`} key={index} iconPosition='top' label={tab.name} />
                     })
                 }
             </Tabs>
         </Box>
-        <Container>
-            <Grid container paddingY={2}>
+        <Container maxWidth='xl'>
+            <Grid container spacing={2} paddingY={2}>
                 {
                     props.products?.map(product => {
                         return <Link href={`/p/${product.slug}`}>
-                            <Grid item key={product.id} md={3} >
+                            <Grid item key={product.id} xs={6} sm={4} md={3} lg={2}>
                                 <Card>
                                     <Image alt={product.ProductImage[0].altTitle} src={`${props.imgPrefix}h_500,w_500/${product.ProductImage[0].url}`} height={500} width={500} />
                                     <Box padding={1}>
